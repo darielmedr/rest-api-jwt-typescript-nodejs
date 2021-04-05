@@ -1,4 +1,4 @@
 export default interface SessionData {
-    tokenId: string,
+    idToken: string,
     expiresIn: number
 }

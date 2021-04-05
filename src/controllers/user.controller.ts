@@ -54,7 +54,7 @@ class UserController {
                 };
                 const token: string = jwt.sign({ id: storedUser.id, email: storedUser.email }, config.JWT.jwtSecret, jwtOptions);
                 const sessionData: SessionData = {
-                    tokenId: token,
+                    idToken: token,
                     expiresIn: config.JWT.expiresIn
                 };
                 return res.status(200).json(sessionData);
