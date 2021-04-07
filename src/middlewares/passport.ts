@@ -5,7 +5,7 @@ import UserModel from '../models/user';
 
 const options: StrategyOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: config.JWT.jwtSecret
+    secretOrKey: config.JWT.JWT_SECRET
 };
 
 export default new Strategy(options, async (payload, done) => {

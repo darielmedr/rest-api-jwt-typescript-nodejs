@@ -7,19 +7,27 @@ export interface User extends Document {
     comparePassword: (password: string) => Promise<boolean>
 }
 
-const UserSchema = new Schema({
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        lowercase: true,
-        trim: true
+const UserSchema = new Schema(
+    {
+        email: {
+            type: String,
+            unique: true,
+            required: true,
+            lowercase: true,
+            trim: true
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        resetLink: {
+            data: String,
+            default: ''
+        }
     },
-    password: {
-        type: String,
-        required: true,
-    }
-});
+    {
+        timestamps: true
+    });
 
 UserSchema.pre<User>('save', async function (next) {
     const user: User = this as User;
