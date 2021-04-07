@@ -30,7 +30,7 @@ class EmailSender {
                 <br />
                 <p>
                     <span>Please click</span>
-                    <a href="${config.CLIENT_URL.PASSWORD_RESET}/${emailData.token}">here</a>
+                    <a href="${config.CLIENT_URL.CHANGE_PASSWORD}/${emailData.token}">here</a>
                     <span>to reset your password.</span>
                 </p>
             `

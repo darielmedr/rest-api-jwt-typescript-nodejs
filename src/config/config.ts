@@ -16,6 +16,6 @@ export default {
         PASSWORD: process.env.EMAIL_PASSWORD || 'q36qUAgQFZRHCH5Xty'
     },
     CLIENT_URL: {
-        PASSWORD_RESET: 'http://localhost:4200/change-password'
+        CHANGE_PASSWORD: 'http://localhost:4200/change-password'
     }
 }

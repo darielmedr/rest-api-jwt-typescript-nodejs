@@ -98,8 +98,7 @@ class UserController {
             const token: string = jwt.sign({ id: user.id, email: user.email }, config.JWT.JWT_RESEST_PASSWORD_SECRET, jwtOptions);
 
             // save the reset password token on the User property <resetTokenLink>
-            user.resetTokenLink = token;
-            await user.save();
+            await user.updateOne({ resetTokenLink: token });
 
             const passwordResetEmailData: PasswordResetEmailData = {
                 userEmail: user.email,
