@@ -97,8 +97,9 @@ class UserController {
             };
             const token: string = jwt.sign({ id: user.id, email: user.email }, config.JWT.JWT_RESEST_PASSWORD_SECRET, jwtOptions);
 
-            // save the reset password token on the User property <resetLink>
-            await user.updateOne({ resetLink: token });
+            // save the reset password token on the User property <resetTokenLink>
+            user.resetTokenLink = token;
+            await user.save();
 
             const passwordResetEmailData: PasswordResetEmailData = {
                 userEmail: user.email,
@@ -121,7 +122,39 @@ class UserController {
         }
     }
 
+    public async changePassword(req: Request, res: Response): Promise<Response> {
+        try {
+            const { resetToken, newPassword } = req.body;
 
+            if (!resetToken) {
+                return res.status(401).json({
+                    message: 'Authentication error.'
+                });
+            }
+
+            // throw an error in case resetToken is invalid or expired
+            jwt.verify(resetToken, config.JWT.JWT_RESEST_PASSWORD_SECRET);
+
+            const user = await UserModel.findOne({ resetTokenLink: resetToken });
+            if (!user) {
+                return res.status(400).json({
+                    message: 'User with this token does not exist.'
+                });
+            }
+            user.password = newPassword;
+            await user.save();
+
+            return res.status(200).json({
+                message: 'Password was changed successfully.'
+            });
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({
+                message: error
+            });
+        }
+    }
 }
 
 const userController = new UserController();

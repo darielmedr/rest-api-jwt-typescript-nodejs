@@ -6,7 +6,7 @@ export default {
     },
     JWT: {
         JWT_SECRET: process.env.JWT_SECRET || 'jwt secret',
-        JWT_RESEST_PASSWORD_SECRET: process.env.JWT_SECRET || 'jwt reset password secret',
+        JWT_RESEST_PASSWORD_SECRET: process.env.JWT_RESET_PASSWORD_SECRET || 'jwt reset password secret',
         EXPIRES_IN_TOKEN: 60 * 60 * 24,     // 1 day
         EXPIRES_IN_LINK: 60 * 20            // 20 minutes
     },

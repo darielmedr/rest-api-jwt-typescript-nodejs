@@ -4,6 +4,7 @@ import bcrytp from 'bcrypt';
 export interface User extends Document {
     email: string,
     password: string,
+    resetTokenLink: string,
     comparePassword: (password: string) => Promise<boolean>
 }
 
@@ -20,7 +21,7 @@ const UserSchema = new Schema(
             type: String,
             required: true,
         },
-        resetLink: {
+        resetTokenLink: {
             data: String,
             default: ''
         }
